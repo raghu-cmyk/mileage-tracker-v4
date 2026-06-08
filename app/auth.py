@@ -1,6 +1,6 @@
 import time
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 
 from argon2 import PasswordHasher
@@ -29,7 +29,7 @@ LOGIN_WINDOW_SECONDS = 300
 
 @dataclass
 class LoginAttemptTracker:
-    attempts: list[float]
+    attempts: list[float] = field(default_factory=list)
 
     def record_failure(self, now: float) -> None:
         self.attempts.append(now)
